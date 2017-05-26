@@ -4,6 +4,13 @@ if (file_exists('source.xml')) {
     // On le charge dans la variable $xml
     $xml = simplexml_load_file('source.xml');
 }
+$nodeNb = 0;
+if(!empty($_GET['p'])){
+    $nodeNbTemp = strip_tags($_GET['p']);
+    if(is_numeric($nodeNbTemp) && $nodeNbTemp <= count($xml->page)){
+        $nodeNb = intval($nodeNbTemp) - 1;
+    }
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -11,14 +18,8 @@ if (file_exists('source.xml')) {
         <meta charset="utf-8">
         <title>
             <?php
-            // Si $_GET['p'] existe
-            if (isset($_GET['p'])) {
-                // On stocke sa valeur dans la variable $page
-                // On retire 1 car l'id de sélection commence 0 et non à 1 (et transforme en entier)
-                $page = $_GET['p'] - 1;
-                // On affiche le bon titre en sélectionnant avec la valeur de $page
-                echo $xml->page[$page]->title;
-            }
+                // On affiche le bon titre en sélectionnant avec la valeur de $nodeNb
+                echo $xml->page[$nodeNb]->title;
             ?>
         </title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -52,14 +53,8 @@ if (file_exists('source.xml')) {
             </div>
         </nav>
         <?php
-        // Si $_GET['p'] existe
-        if (isset($_GET['p'])) {
-            // On stocke sa valeur dans la variable $page
-            // On retire 1 car l'id de sélection commence 0 et non à 1 (et transforme en entier)
-            $page = $_GET['p'] - 1;
-            // On affiche le bon contenu en sélectionnant avec la valeur de $page
-            echo $xml->page[$page]->content;
-        }
+            // On affiche le bon contenu en sélectionnant la page avec l'id qui est la valeur de $nodeNb
+            echo $xml->page[$nodeNb]->content;
         ?>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </body>
