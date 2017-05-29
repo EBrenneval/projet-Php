@@ -1,3 +1,7 @@
+body{
+    background-color: #EBEBEB;
+}
+
 .img{
     margin-top: 20px;
 }
@@ -31,20 +35,10 @@ label{
     padding-top: 10px;
 }
 
-form{
-    margin-bottom: 20px;
-    background-color: #ededed;
-    margin-top: 10px;
-}
-
-.list_coords{
-    margin-left: 180px;
-}
-
-#para_devis{
-    margin-top: 26px;
-}
-
 .pseudo{
     font-weight: bold;
+}
+
+#contact_list{
+    margin-left: 130px;
 }
